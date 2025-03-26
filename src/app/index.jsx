@@ -7,6 +7,7 @@ const Index = () => {
     <View className='p-2'>
       <Text>Inicio</Text>
       <Link href="signup">Signup</Link>
+      <Link href="recovery-password">RecoveryPassword</Link>
       <Link href="login">Login</Link>
       <Link href='home'>Pagina inicial</Link>
     </View>
@@ -14,3 +15,5 @@ const Index = () => {
 }
 
 export default Index
+
+
