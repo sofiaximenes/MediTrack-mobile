@@ -1,4 +1,4 @@
-import { View, Text, TextInput, Image, TouchableOpacity, KeyboardAvoidingView, ScrollView, Platform } from 'react-native'
+import { View, Text, TextInput, Image, TouchableOpacity, KeyboardAvoidingView, ScrollView, Platform, Alert } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Fontisto from '@expo/vector-icons/Fontisto';
@@ -6,8 +6,12 @@ import Slider from '../components/Slider';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
+import { router } from 'expo-router';
 
 const Home = () => {
+    const handleMyMedicines = async () => {
+        router.push('/my-medicines');
+    }
     return (
         <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} className="flex-1">
             <ScrollView contentContainerStyle={{ flexGrow: 1 }} keyboardShouldPersistTaps="handled">
@@ -35,7 +39,7 @@ const Home = () => {
                         </View>
                     </View>
                     <View className='flex-row items-center gap-10 mx-5 justify-between'>
-                        <TouchableOpacity activeOpacity={0.7} className='bg-[#7197ff] rounded-xl shadow-lg shadow-blue-700'>
+                        <TouchableOpacity activeOpacity={0.7}  onPress={() => handleMyMedicines()} className='bg-[#7197ff] rounded-xl shadow-lg shadow-blue-700'>
                             <View className='flex-col gap-1 items-center p-2'>
                                 <FontAwesome name="medkit" size={36} color="white" />
                                 <Text className='text-white font-semibold text-lg'>Meus salvos</Text>
@@ -53,5 +57,6 @@ const Home = () => {
         </KeyboardAvoidingView>
     )
 }
+
 
 export default Home
