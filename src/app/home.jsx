@@ -6,8 +6,12 @@ import Slider from '../components/Slider';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
+import { router } from 'expo-router';
 
 const Home = () => {
+    const handlePostos = async () => {
+        router.push('/postos');
+    }
     return (
         <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} className="flex-1">
             <ScrollView contentContainerStyle={{ flexGrow: 1 }} keyboardShouldPersistTaps="handled">
@@ -41,7 +45,7 @@ const Home = () => {
                                 <Text className='text-white font-semibold text-lg'>Meus salvos</Text>
                             </View>
                         </TouchableOpacity>
-                        <TouchableOpacity activeOpacity={0.7} className='bg-[#7197ff] rounded-xl shadow-lg shadow-blue-700'>
+                        <TouchableOpacity activeOpacity={0.7} onPress={() => handlePostos()} className='bg-[#7197ff] rounded-xl shadow-lg shadow-blue-700'>
                             <View className='flex-col gap-1 items-center p-2'>
                                 <FontAwesome5 name="hospital" size={36} color="white" />
                                 <Text className='text-white font-semibold text-lg'>Encontrar postos</Text>
