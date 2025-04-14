@@ -1,62 +1,93 @@
-import { View, Text, TextInput, Image, TouchableOpacity, KeyboardAvoidingView, ScrollView, Platform, Alert } from 'react-native'
-import React from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import Fontisto from '@expo/vector-icons/Fontisto';
-import Slider from '../components/Slider';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
+import React from "react";
+import {
+    KeyboardAvoidingView,
+    Platform,
+    ScrollView,
+    TextInput,
+    View,
+    Text,
+    TouchableOpacity,
+    Image,
+} from "react-native";
+import tw from "twrnc";
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { router } from 'expo-router';
 
+
 const Home = () => {
-    const handleMyMedicines = async () => {
-        router.push('/my-medicines');
-    }
     return (
-        <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} className="flex-1">
-            <ScrollView contentContainerStyle={{ flexGrow: 1 }} keyboardShouldPersistTaps="handled">
-                <SafeAreaView className='flex-col gap-10 pt-2'>
-                    <View className='flex-col items-center gap-1 mx-5'>
-                        <TouchableOpacity activeOpacity={0.2} className='self-end absolute'>
-                            <MaterialIcons name="logout" size={28} color="black" />
-                        </TouchableOpacity>
-                        <FontAwesome name="user-circle" size={64} color="black" />
-                        <Text className='font-medium text-2xl'>Otavio Adamis</Text>
-                        <View className='flex-row gap-1 items-center justify-between self-start'>
-                            <MaterialIcons name="alternate-email" size={16} color="black" />
-                            <Text className='font-light text-lg'>otavioadamis@gmail.com</Text>
+        <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            style={tw`flex-1 bg-white`}
+        >
+            <ScrollView
+                contentContainerStyle={tw`flex-grow`}
+                keyboardShouldPersistTaps="handled"
+            >
+                <View style={tw`flex-col items-center gap-4 p-6`}>
+                    {/* User Profile Card */}
+                    <View style={tw`bg-white p-5 rounded-xl shadow-lg w-full sm:w-3/4 md:w-1/2 lg:w-1/3`}>
+                        <View style={tw`flex-row items-center gap-4`}>
+                            <Image
+                                source={{
+                                    uri: 'https://i.pinimg.com/originals/22/91/4f/22914f8e086fa395ec800697af375285.jpg',
+                                }}
+                                style={tw`w-16 h-16 rounded-full`}
+                            />
+                            <View>
+                                <Text style={tw`text-xl font-semibold text-gray-800 text-center`}>Otavio Adamis</Text>
+                                <Text style={tw`text-sm text-gray-500 text-center`}>otavioadamis@gmail.com</Text>
+                            </View>
                         </View>
                     </View>
-                    <View>
-                        <Slider />
+
+                    {/* Logout Button with icon above text */}
+                    <TouchableOpacity style={tw`absolute top-5 right-5 flex-col items-center`}>
+                        <MaterialIcons name="exit-to-app" size={24} color="gray" />
+                        <Text style={tw`text-xs text-gray-700 mt-1`}>sair</Text>
+                    </TouchableOpacity>
+
+                    {/* Welcome Text */}
+                    <Text style={tw`text-3xl font-semibold text-gray-800 text-center mb-6`}>Bem-vindo</Text>
+
+                    {/* Search Input Section */}
+                    <View style={tw`bg-blue-600 p-3 flex-row items-center justify-center rounded-xl w-full sm:w-3/4 md:w-1/2 lg:w-1/3 shadow-lg border border-gray-300`}>
+                        <FontAwesome5 name="search" size={18} color="white" style={tw`mr-3`} />
+                        <TextInput
+                            style={tw`text-white font-semibold text-lg ml-2 text-center`}
+                            placeholder="Procure um remédio"
+                            placeholderTextColor="white"
+                        />
                     </View>
-                    <View className='bg-cyan-400 p-3 flex-row items-center rounded-xl gap-2 mx-5 shadow-lg shadow-cyan-400'>
-                        <View>
-                            <Fontisto name="pills" size={28} color="black" />
-                        </View>
-                        <View className='border border-[#fff] rounded-xl flex-1 mr-12'>
-                            <TextInput placeholder='Procure um remedio' placeholderTextColor='white'></TextInput>
-                        </View>
-                    </View>
-                    <View className='flex-row items-center gap-10 mx-5 justify-between'>
-                        <TouchableOpacity activeOpacity={0.7}  onPress={() => handleMyMedicines()} className='bg-[#7197ff] rounded-xl shadow-lg shadow-blue-700'>
-                            <View className='flex-col gap-1 items-center p-2'>
-                                <FontAwesome name="medkit" size={36} color="white" />
-                                <Text className='text-white font-semibold text-lg'>Meus salvos</Text>
+
+                    {/* Buttons Section - Stack buttons vertically */}
+                    <View style={tw`flex-col gap-6 w-full sm:w-3/4 md:w-1/2 lg:w-1/3 mt-6`}>
+                        <TouchableOpacity
+                            activeOpacity={0.7}
+                            style={tw`bg-blue-600 rounded-xl shadow-lg py-6`}
+                            onPress={() => router.push('/my-medicines')}
+                        >
+                            <View style={tw`flex-row items-center justify-center`}>
+                                <FontAwesome5 name="pills" size={24} color="white" />
+                                <Text style={tw`text-white font-semibold text-lg ml-2 text-center`}>Meus Salvos</Text>
                             </View>
                         </TouchableOpacity>
-                        <TouchableOpacity activeOpacity={0.7} className='bg-[#7197ff] rounded-xl shadow-lg shadow-blue-700'>
-                            <View className='flex-col gap-1 items-center p-2'>
-                                <FontAwesome5 name="hospital" size={36} color="white" />
-                                <Text className='text-white font-semibold text-lg'>Encontrar postos</Text>
+
+                        <TouchableOpacity
+                            activeOpacity={0.7}
+                            style={tw`bg-blue-600 rounded-xl shadow-lg py-6`}
+                        >
+                            <View style={tw`flex-row items-center justify-center`}>
+                                <FontAwesome5 name="hospital" size={24} color="white" />
+                                <Text style={tw`text-white font-semibold text-lg ml-2 text-center`}>Encontrar Postos</Text>
                             </View>
                         </TouchableOpacity>
                     </View>
-                </SafeAreaView>
+                </View>
             </ScrollView>
         </KeyboardAvoidingView>
-    )
-}
+    );
+};
 
-
-export default Home
+export default Home;
