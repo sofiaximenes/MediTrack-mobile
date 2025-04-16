@@ -9,7 +9,6 @@ const HeaderMenu = () => {
 
   return (
     <View style={tw`bg-blue-800 px-4 py-3`}>
-      {/* Botão do menu com ícone de três linhas */}
       <TouchableOpacity
         onPress={() => setOpen(!open)}
         style={tw`flex-row items-center justify-between`}
@@ -18,7 +17,6 @@ const HeaderMenu = () => {
         <Feather name={open ? 'chevron-up' : 'chevron-down'} size={20} color="white" />
       </TouchableOpacity>
 
-      {/* Menu Dropdown */}
       {open && (
         <View style={tw`mt-2`}>
           <Link href="/signup" asChild>
