@@ -8,7 +8,7 @@ export class MedicamentoService {
     async SearchMedsPorNome(nome){
         try {
             const response =  await this.http.get(`medicamento/pesquisar/${nome}`);
-            console.log(response.data)
+            return response.data
         } catch (error) {
             console.log("Erro ao buscar medicamento", error);
             if (error.response && error.response.status !== 200) {
@@ -22,7 +22,7 @@ export class MedicamentoService {
     async GetAllPostosByMedicamentoId(medicamentoId){
         try {
             const response =  await this.http.get(`medicamento/${medicamentoId}`);
-            console.log(response.data)
+            return response.data
         } catch (error) {
             console.log("Erro ao buscar postos", error);
             if (error.response && error.response.status !== 200) {
@@ -32,5 +32,4 @@ export class MedicamentoService {
             }
         }
     }
-
 }
