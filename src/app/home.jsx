@@ -13,6 +13,7 @@ import tw from "twrnc";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { router } from 'expo-router';
+import Slider from '../components/Slider';
 
 
 const Home = () => {
@@ -26,8 +27,8 @@ const Home = () => {
                 keyboardShouldPersistTaps="handled"
             >
                 <View style={tw`flex-col items-center gap-4 p-6`}>
-                    {/* User Profile Card */}
-                    <View style={tw`bg-white p-5 rounded-xl shadow-lg w-full sm:w-3/4 md:w-1/2 lg:w-1/3`}>
+                    
+                    <View style={tw`bg-white p-5 rounded-xl shadow-lg w-full sm:w-3/4 md:w-12 lg:w-1/3`}/>
                         <View style={tw`flex-row items-center gap-4`}>
                             <Image
                                 source={{
@@ -42,16 +43,16 @@ const Home = () => {
                         </View>
                     </View>
 
-                    {/* Logout Button with icon above text */}
+               
                     <TouchableOpacity style={tw`absolute top-5 right-5 flex-col items-center`}>
                         <MaterialIcons name="exit-to-app" size={24} color="gray" />
                         <Text style={tw`text-xs text-gray-700 mt-1`}>sair</Text>
                     </TouchableOpacity>
 
-                    {/* Welcome Text */}
+                   
                     <Text style={tw`text-3xl font-semibold text-gray-800 text-center mb-6`}>Bem-vindo</Text>
 
-                    {/* Search Input Section */}
+                    
                     <View style={tw`bg-blue-600 p-3 flex-row items-center justify-center rounded-xl w-full sm:w-3/4 md:w-1/2 lg:w-1/3 shadow-lg border border-gray-300`}>
                         <FontAwesome5 name="search" size={18} color="white" style={tw`mr-3`} />
                         <TextInput
@@ -61,7 +62,7 @@ const Home = () => {
                         />
                     </View>
 
-                    {/* Buttons Section - Stack buttons vertically */}
+                    
                     <View style={tw`flex-col gap-6 w-full sm:w-3/4 md:w-1/2 lg:w-1/3 mt-6`}>
                         <TouchableOpacity
                             activeOpacity={0.7}
@@ -83,6 +84,7 @@ const Home = () => {
                                 <Text style={tw`text-white font-semibold text-lg ml-2 text-center`}>Encontrar Postos</Text>
                             </View>
                         </TouchableOpacity>
+                        <Slider></Slider>
                     </View>
                 </View>
             </ScrollView>

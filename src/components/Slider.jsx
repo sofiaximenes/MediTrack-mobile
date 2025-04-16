@@ -1,6 +1,7 @@
 import { View, Text, FlatList } from 'react-native'
 import React from 'react'
 import SliderItem from './SliderItem'
+import tw from 'twrnc'
 
 const Slider = () => {
     const ImageSlider = [
@@ -22,7 +23,7 @@ const Slider = () => {
     ]
 
     return (
-        <View>
+        <View style={tw`flex-col gap-6 w-full sm:w-3/4 md:w-1/2 lg:w-1/3 mt-6`}>
             <FlatList
                 horizontal
                 showsHorizontalScrollIndicator={false}
