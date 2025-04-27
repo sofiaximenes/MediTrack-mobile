@@ -6,7 +6,6 @@ const Index = () => {
   return (
     <View className='p-2'>
       <Text>Inicio</Text>
-      <Link href='postos'>Postos</Link>
       <Link href="signup">Signup</Link>
       <Link href="recovery-password">RecoveryPassword</Link>
       <Link href="login">Login</Link>

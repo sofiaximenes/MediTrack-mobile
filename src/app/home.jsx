@@ -34,8 +34,10 @@ const Home = () => {
                         <View>
                             <Fontisto name="pills" size={28} color="black" />
                         </View>
-                        <View className='border border-[#fff] rounded-xl flex-1 mr-12'>
-                            <TextInput placeholder='Procure um remedio' placeholderTextColor='white'></TextInput>
+                        <View className='flex-1 p-2'>
+                            <TouchableOpacity onPress={() => router.push("medicamento/pesquisa")}>
+                            <Text className='text-white font-semibold text-lg'>Buscar medicamentos</Text>
+                            </TouchableOpacity>
                         </View>
                     </View>
                     <View className='flex-row items-center gap-10 mx-5 justify-between'>
