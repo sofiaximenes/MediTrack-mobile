@@ -14,7 +14,6 @@ import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { router } from 'expo-router';
 import Slider from '../components/Slider';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 const Home = () => {
     const handlePostos = async () => {
@@ -88,7 +87,6 @@ const Home = () => {
                         </TouchableOpacity>
                         <Slider></Slider>
                     </View>
-                </View>
             </ScrollView>
         </KeyboardAvoidingView>
     );
