@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.azul1 {background-color: #159ab7;}
+.azul2 {background-color: #9ac5d3;}
