@@ -7,24 +7,31 @@ export default function useUserLocation() {
     const [errorMsg, setErrorMsg] = useState(null);
 
     useEffect(() => {
-        (async () => {
+        const fetchLocation = async () => {
             setLoading(true);
-            let { status } = await Location.requestForegroundPermissionsAsync();
+            try {
+                let { status } = await Location.requestForegroundPermissionsAsync();
 
-            if (status !== 'granted') {
-                setErrorMsg('Permission to access location was denied');
+                if (status !== 'granted') {
+                    setErrorMsg('Permission to access location was denied');
+                    setLoading(false);
+                    return;
+                }
+
+                const { coords } = await Location.getCurrentPositionAsync({});
+                setLocation({
+                    latitude: coords.latitude,
+                    longitude: coords.longitude
+                });
+            } catch (error) {
+                setErrorMsg('Error fetching location');
+                console.error(error);
+            } finally {
                 setLoading(false);
-                return;
             }
+        };
 
-            let location = await Location.getCurrentPositionAsync({});
-            setLocation({
-                latitude: location.coords.latitude,
-                longitude: location.coords.longitude
-            });
-
-            setLoading(false);
-        })();
+        fetchLocation();
     }, []);
 
     return { location, loading, errorMsg };
