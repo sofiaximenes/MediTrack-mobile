@@ -1,6 +1,11 @@
 import "../global.css"
-import { Stack } from "expo-router"
+import { Slot } from "expo-router"
+import { LocationProvider } from "../hooks/locationContext"
 
 export default function Layout(){
-    return <Stack/>
+    return (
+        <LocationProvider>
+          <Slot />
+        </LocationProvider>
+      );
 }
