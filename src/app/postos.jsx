@@ -16,6 +16,15 @@ const Postos = () => {
   const postoService = new PostoService();
   const { location, loading: locationLoading, errorMsg } = useUserLocation();
 
+  // 
+  // {"bairro": "Pirambu", 
+  // "distanciaKm": 6.03, 
+  // "id": "c0372982-1700-4b46-b5e6-34da959d733a",
+  //  "linhasOnibus": "16, 51, 55, 92, 101, 120, 130, 132, 711, 725",
+  //  "nome": "Posto de Saude Guiomar Arruda",
+  //  "numero": "6",
+  //  "rua": "Rua Gal Costa Matos",
+  //  "telefone": "(85) 3452-6377"}
 
   useEffect(() => {
     if (!locationLoading && location) {
@@ -37,33 +46,6 @@ const Postos = () => {
     }
   }, [locationLoading]);
 
-  const remedios = [
-    {
-      nomePosto: 'Paracetamol',
-      enderecoPosto: 'Analgésico e antipirético usado para alívio da dor e febre.',
-      distanciaPosto: 2.2
-    },
-    {
-      nomePosto: 'Ibuprofeno',
-      enderecoPosto: 'Medicamento anti-inflamatório não esteroide usado para dor e inflamações.',
-      distanciaPosto: 3.1
-    },
-    {
-      nomePosto: 'Amoxicilina',
-      enderecoPosto: 'Antibiótico usado no tratamento de infecções bacterianas.',
-      distanciaPosto: 4.6
-    },
-    {
-      nomePosto: 'Loratadina',
-      enderecoPosto: 'Antialérgico utilizado para tratar rinite alérgica e urticária.',
-      distanciaPosto: 7.2
-    },
-    {
-      nomePosto: 'Omeprazol',
-      enderecoPosto: 'Usado para tratar problemas gástricos como refluxo e úlcera.',
-      distanciaPosto: 7.2
-    },
-  ];
 
   if (locationLoading || postosLoading) {
     return (
@@ -82,17 +64,22 @@ const Postos = () => {
           <TouchableOpacity onPress={() => router.back()}>
             <AntDesign name="arrowleft" size={24} color="black" />
           </TouchableOpacity>
-          <Text style={tw`ml-4 text-xl font-bold text-blue-900`}>Postos proximos</Text>
+          <Text style={tw`ml-4 text-xl font-bold text-blue-900`}>Postos próximos</Text>
         </View>
 
         <FlatList
-          data={remedios}
+          data={postos}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item }) => (
             <CardPostos
-              nomePosto={item.nomePosto}
-              enderecoPosto={item.enderecoPosto}
-              distanciaPosto={item.distanciaPosto}
+              nomePosto={item.nome}
+              bairro={item.bairro}
+              enderecoPosto={item.rua}
+              numeroPosto={item.numero}
+              telefone={item.telefone}
+              linhasOnibus={item.linhasOnibus}
+              distanciaPosto={item.distanciaKm}
+            
             />
           )}
           contentContainerStyle={{ paddingBottom: 20 }}
