@@ -17,7 +17,7 @@ const CardPostos = ({ nomePosto, enderecoPosto, numeroPosto, linhasOnibus, dista
         <Text style={tw`font-bold`}>Telefone:</Text> {telefone}
         </Text>
         <Text style={tw`text-sm text-gray-600`}>
-        <Text style={tw`font-bold`}>Distância:</Text> {distanciaPosto} km
+        <Text style={tw`font-bold`}>Distância:</Text> {parseFloat(distanciaPosto).toFixed(2)} km
         </Text>
         <Text style={tw`text-sm text-gray-600`}>
         <Text style={tw`font-bold`}>Ônibus que passam no local: </Text> nº {linhasOnibus}
