@@ -5,38 +5,39 @@ import React, { useState, useEffect } from 'react'
 import { useLocalSearchParams } from 'expo-router';
 import { MedicamentoService } from '../../services/api/MedicamentoService';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import useUserLocation from '../../hooks/useUserLocation';
+import CardPostos from '../../components/CardPostos';
+import { LoadingSpinner } from '../../components/LoadingSpinner';
 
 const MedicamentoDetails = () => {
     const { medicamentoId } = useLocalSearchParams();
     const [medicamento, setMedicamento] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-
     const medicamentoService = new MedicamentoService();
+    const { location, loading: locationLoading, errorMsg } = useUserLocation();
 
     useEffect(() => {
-        const fetchMedicamentoDetails = async () => {
-            try {
-                setLoading(true);
-                const response = await medicamentoService.GetAllPostosByMedicamentoId(medicamentoId);
-                console.log(response)
-                setMedicamento(response);
-                setLoading(false);
-            } catch (err) {
-                setError("Erro ao carregar os detalhes do medicamento.");
-                setLoading(false);
-            }
-        };
-        fetchMedicamentoDetails();
-    }, []);
+        if (!locationLoading && location) {
+            const fetchMedicamentoDetails = async () => {
+                try {
+                    setLoading(true);
+                    const response = await medicamentoService.GetAllPostosByMedicamentoId(medicamentoId, location);
+                    console.log(response)
+                    setMedicamento(response);
+                    setLoading(false);
+                } catch (err) {
+                    setError("Erro ao carregar os detalhes do medicamento.");
+                    setLoading(false);
+                }
+            };
+            fetchMedicamentoDetails();
+        }
+    }, [locationLoading]);
 
-    if (loading) {
+    if (loading || locationLoading) {
         return (
-            <>
-                <SafeAreaView className='flex-1 items-center justify-center'>
-                    <ActivityIndicator size={52} color="#00ff00"/>;
-                </SafeAreaView>
-            </>
+            <LoadingSpinner text='Procurando nos estoques dos postos...'/>
         )
     }
 
@@ -66,19 +67,20 @@ const MedicamentoDetails = () => {
             </View>
             <ScrollView contentContainerStyle={{ padding: 12 }} showsVerticalScrollIndicator={false}>
                 {medicamento.postos?.map((posto) => (
-                    <View key={posto.id} className='flex-col bg-slate-200 gap-y-4 p-4 rounded-xl mb-6 shadow shadow-black'>
-                        <Text className='text-blue-700 font-bold text-2xl'>{posto.nomePosto}</Text>
-                        {posto.telefone && (
-                            <View className='flex-row items-center gap-x-2'>
-                                <AntDesign name="phone" size={18} color="black" />
-                                <Text className='font-medium text-lg'>{posto.telefone}</Text>
-                            </View>
-                        )}
-                        <View className='flex-row items-center gap-x-2 mr-2'>
-                            <Entypo name="location-pin" size={18} color="black" />
-                            <Text className='font-medium text-lg'>{posto.ruaPosto}, {posto.bairroPosto} - {posto.numeroPosto}</Text>
-                        </View>
-                    </View>
+                    <CardPostos
+                        key={posto.postoId}
+                        posto={{
+                            nome: posto.nomePosto,
+                            rua: posto.ruaPosto,
+                            numero: posto.numeroPosto,
+                            bairro: posto.bairroPosto,
+                            linhasOnibus: posto.linhasOnibus,
+                            telefone: posto.telefone,
+                            latitude: posto.latitude,
+                            longitude: posto.longitude,
+                            distanciaKm: posto.distanciaKm
+                        }}
+                    />
                 ))}
             </ScrollView>
         </SafeAreaView>
