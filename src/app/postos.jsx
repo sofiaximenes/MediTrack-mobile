@@ -50,7 +50,7 @@ const Postos = () => {
   if (locationLoading || postosLoading) {
     return (
       <View>
-        <Text>Procurando postos proximos...</Text>
+        <Text>Procurando postos próximos...</Text>
       </View>)
   }
 
