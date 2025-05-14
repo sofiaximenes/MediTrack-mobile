@@ -7,6 +7,8 @@ import CardPostos from '../components/CardPostos';
 import HeaderMenu from '../components/HeaderMenu';
 import useUserLocation from '../hooks/useUserLocation';
 import { PostoService } from '../services/api/PostoService';
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
+import { LoadingSpinner } from '../components/LoadingSpinner';
 
 const Postos = () => {
   const [postos, setPostos] = useState([]);
@@ -41,17 +43,20 @@ const Postos = () => {
           setPostosLoading(false);
         }
       };
-  
+
       fetchPostosProximos();
     }
   }, [locationLoading]);
 
+  const navigateToMapaGeral = () => {
+    router.navigate('/mapa/mapa-geral')
+  }
+
 
   if (locationLoading || postosLoading) {
     return (
-      <View>
-        <Text>Procurando postos proximos...</Text>
-      </View>)
+      <LoadingSpinner text="Procurando postos próximos..."/>
+    )
   }
 
   return (
@@ -65,6 +70,14 @@ const Postos = () => {
             <AntDesign name="arrowleft" size={24} color="black" />
           </TouchableOpacity>
           <Text style={tw`ml-4 text-xl font-bold text-blue-900`}>Postos próximos</Text>
+          <View className='absolute right-4'>
+            <TouchableOpacity onPress={navigateToMapaGeral}
+              className='flex-row gap-x-2 items-center'
+            >
+              <FontAwesome5 name="map-marked-alt" size={18} color="black" />
+              <Text className='text-blue-700'>Ver todos</Text>
+            </TouchableOpacity>
+          </View>
         </View>
 
         <FlatList
@@ -72,14 +85,7 @@ const Postos = () => {
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item }) => (
             <CardPostos
-              nomePosto={item.nome}
-              bairro={item.bairro}
-              enderecoPosto={item.rua}
-              numeroPosto={item.numero}
-              telefone={item.telefone}
-              linhasOnibus={item.linhasOnibus}
-              distanciaPosto={item.distanciaKm}
-            
+              posto={item}
             />
           )}
           contentContainerStyle={{ paddingBottom: 20 }}

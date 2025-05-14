@@ -19,9 +19,9 @@ export class MedicamentoService {
         }
     }
 
-    async GetAllPostosByMedicamentoId(medicamentoId){
+    async GetAllPostosByMedicamentoId(medicamentoId, location){
         try {
-            const response =  await this.http.get(`medicamento/${medicamentoId}`);
+            const response =  await this.http.get(`medicamento/${medicamentoId}?lat=${location.latitude}&lon=${location.longitude}`);
             return response.data
         } catch (error) {
             console.log("Erro ao buscar postos", error);
