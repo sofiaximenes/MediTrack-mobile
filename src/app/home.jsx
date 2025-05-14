@@ -38,7 +38,7 @@ const Home = () => {
                         <Text className='font-medium text-2xl'>Otavio Adamis</Text>
                         <View className='flex-row gap-1 items-center justify-between self-start'>
                             <MaterialIcons name="alternate-email" size={16} color="black" />
-                            <Text className='font-light text-lg'>otavioadamis@gmail.com</Text>
+                            <Text className='font-light text-lg'></Text>
                         </View>
                     </View>
 
@@ -81,7 +81,7 @@ const Home = () => {
                             >
                                 <View style={tw`flex-row items-center justify-center`}>
                                     <FontAwesome5 name="hospital" size={24} color="white" />
-                                    <Text style={tw`text-white font-semibold text-lg ml-2 text-center`}>Postos proximos</Text>
+                                    <Text style={tw`text-white font-semibold text-lg ml-2 text-center`}>Postos próximos</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>
